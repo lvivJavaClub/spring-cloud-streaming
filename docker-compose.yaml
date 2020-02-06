@@ -28,3 +28,8 @@ services:
       - ./zk-single-kafka-single/kafka/data:/var/lib/kafka/data
     depends_on:
       - zookeeper
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:5.4.0
+    ports:
+      - "8081:8081"
