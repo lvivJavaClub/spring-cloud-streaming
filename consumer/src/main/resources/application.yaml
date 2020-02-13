@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        process-in-0:
+          destination: sensor-topic
+        schemaRegistryClient:
+          endpoint: http://localhost:8081
+      schema:
+        avro:
+          schema-locations: classpath:avro/sensor.avsc
+  kafka:
+    bootstrap-servers: 127.0.0.1:29092
+server.port: 9999
