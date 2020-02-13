@@ -29,3 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+zk-single-kafka-single/*
