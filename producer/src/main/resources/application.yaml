@@ -10,5 +10,9 @@ spring:
         schema:
           avro:
             schema-location: classpath:avro/sensor.avsc
+  main:
+    allow-bean-definition-overriding: true
+  kafka:
+    bootstrap-servers: 127.0.0.1:29092
 server:
   port: 9009

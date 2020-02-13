@@ -13,6 +13,7 @@ import org.springframework.cloud.schema.registry.client.ConfluentSchemaRegistryC
 import org.springframework.cloud.schema.registry.client.EnableSchemaRegistryClient;
 import org.springframework.cloud.schema.registry.client.SchemaRegistryClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,13 +44,19 @@ public class ProducerApplication {
         return "200 ok";
     }
 
+    @GetMapping(value = "/")
+    public String getSendMessage() {
+        unbounded.offer(randomSensor());
+        return "200 ok";
+    }
+
     @Bean
     public Supplier<Sensor> supplier() {
         return () -> unbounded.poll();
     }
 
     @Bean
-    public SchemaRegistryClient schemaRegistryClient(@Value("${spring.cloud.stream.schemaRegistryClient.endpoint}") String endpoint){
+    public SchemaRegistryClient schemaRegistryClient(@Value("${spring.cloud.stream.bindings.schemaRegistryClient.endpoint}") String endpoint){
         ConfluentSchemaRegistryClient client = new ConfluentSchemaRegistryClient();
         client.setEndpoint(endpoint);
         return client;
