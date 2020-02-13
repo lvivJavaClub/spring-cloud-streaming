@@ -4,7 +4,8 @@
   "name" : "Sensor",
   "fields" : [
     {"name":"id","type":"string"},
-    {"name":"temperature", "type":"float", "default":0.0},
+    {"name":"internalTemperature", "type":"float", "default":0.0, "aliases":["temperature"]},
+    {"name":"externalTemperature", "type":"float", "default":0.0},
     {"name":"acceleration", "type":"float","default":0.0},
     {"name":"velocity","type":"float","default":0.0}
   ]

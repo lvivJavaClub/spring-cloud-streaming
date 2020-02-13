@@ -16,6 +16,7 @@
 
 	<modules>
 		<module>producer</module>
+		<module>producer-new</module>
 		<module>consumer</module>
 	</modules>
 

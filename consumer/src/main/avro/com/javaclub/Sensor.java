@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Sensor extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 824399368059147695L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Sensor\",\"namespace\":\"com.javaclub\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"temperature\",\"type\":\"float\",\"default\":0.0},{\"name\":\"acceleration\",\"type\":\"float\",\"default\":0.0},{\"name\":\"velocity\",\"type\":\"float\",\"default\":0.0}]}");
+  private static final long serialVersionUID = 2769846947018644634L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Sensor\",\"namespace\":\"com.javaclub\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"internalTemperature\",\"type\":\"float\",\"default\":0.0,\"aliases\":[\"temperature\"]},{\"name\":\"externalTemperature\",\"type\":\"float\",\"default\":0.0},{\"name\":\"acceleration\",\"type\":\"float\",\"default\":0.0},{\"name\":\"velocity\",\"type\":\"float\",\"default\":0.0}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -52,7 +52,8 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
   }
 
   @Deprecated public java.lang.CharSequence id;
-  @Deprecated public float temperature;
+  @Deprecated public float internalTemperature;
+  @Deprecated public float externalTemperature;
   @Deprecated public float acceleration;
   @Deprecated public float velocity;
 
@@ -66,13 +67,15 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
   /**
    * All-args constructor.
    * @param id The new value for id
-   * @param temperature The new value for temperature
+   * @param internalTemperature The new value for internalTemperature
+   * @param externalTemperature The new value for externalTemperature
    * @param acceleration The new value for acceleration
    * @param velocity The new value for velocity
    */
-  public Sensor(java.lang.CharSequence id, java.lang.Float temperature, java.lang.Float acceleration, java.lang.Float velocity) {
+  public Sensor(java.lang.CharSequence id, java.lang.Float internalTemperature, java.lang.Float externalTemperature, java.lang.Float acceleration, java.lang.Float velocity) {
     this.id = id;
-    this.temperature = temperature;
+    this.internalTemperature = internalTemperature;
+    this.externalTemperature = externalTemperature;
     this.acceleration = acceleration;
     this.velocity = velocity;
   }
@@ -82,9 +85,10 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return temperature;
-    case 2: return acceleration;
-    case 3: return velocity;
+    case 1: return internalTemperature;
+    case 2: return externalTemperature;
+    case 3: return acceleration;
+    case 4: return velocity;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -94,9 +98,10 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = (java.lang.CharSequence)value$; break;
-    case 1: temperature = (java.lang.Float)value$; break;
-    case 2: acceleration = (java.lang.Float)value$; break;
-    case 3: velocity = (java.lang.Float)value$; break;
+    case 1: internalTemperature = (java.lang.Float)value$; break;
+    case 2: externalTemperature = (java.lang.Float)value$; break;
+    case 3: acceleration = (java.lang.Float)value$; break;
+    case 4: velocity = (java.lang.Float)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -118,19 +123,35 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
   }
 
   /**
-   * Gets the value of the 'temperature' field.
-   * @return The value of the 'temperature' field.
+   * Gets the value of the 'internalTemperature' field.
+   * @return The value of the 'internalTemperature' field.
    */
-  public java.lang.Float getTemperature() {
-    return temperature;
+  public java.lang.Float getInternalTemperature() {
+    return internalTemperature;
   }
 
   /**
-   * Sets the value of the 'temperature' field.
+   * Sets the value of the 'internalTemperature' field.
    * @param value the value to set.
    */
-  public void setTemperature(java.lang.Float value) {
-    this.temperature = value;
+  public void setInternalTemperature(java.lang.Float value) {
+    this.internalTemperature = value;
+  }
+
+  /**
+   * Gets the value of the 'externalTemperature' field.
+   * @return The value of the 'externalTemperature' field.
+   */
+  public java.lang.Float getExternalTemperature() {
+    return externalTemperature;
+  }
+
+  /**
+   * Sets the value of the 'externalTemperature' field.
+   * @param value the value to set.
+   */
+  public void setExternalTemperature(java.lang.Float value) {
+    this.externalTemperature = value;
   }
 
   /**
@@ -198,7 +219,8 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
     implements org.apache.avro.data.RecordBuilder<Sensor> {
 
     private java.lang.CharSequence id;
-    private float temperature;
+    private float internalTemperature;
+    private float externalTemperature;
     private float acceleration;
     private float velocity;
 
@@ -217,17 +239,21 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.temperature)) {
-        this.temperature = data().deepCopy(fields()[1].schema(), other.temperature);
+      if (isValidValue(fields()[1], other.internalTemperature)) {
+        this.internalTemperature = data().deepCopy(fields()[1].schema(), other.internalTemperature);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.acceleration)) {
-        this.acceleration = data().deepCopy(fields()[2].schema(), other.acceleration);
+      if (isValidValue(fields()[2], other.externalTemperature)) {
+        this.externalTemperature = data().deepCopy(fields()[2].schema(), other.externalTemperature);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.velocity)) {
-        this.velocity = data().deepCopy(fields()[3].schema(), other.velocity);
+      if (isValidValue(fields()[3], other.acceleration)) {
+        this.acceleration = data().deepCopy(fields()[3].schema(), other.acceleration);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.velocity)) {
+        this.velocity = data().deepCopy(fields()[4].schema(), other.velocity);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -241,17 +267,21 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.temperature)) {
-        this.temperature = data().deepCopy(fields()[1].schema(), other.temperature);
+      if (isValidValue(fields()[1], other.internalTemperature)) {
+        this.internalTemperature = data().deepCopy(fields()[1].schema(), other.internalTemperature);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.acceleration)) {
-        this.acceleration = data().deepCopy(fields()[2].schema(), other.acceleration);
+      if (isValidValue(fields()[2], other.externalTemperature)) {
+        this.externalTemperature = data().deepCopy(fields()[2].schema(), other.externalTemperature);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.velocity)) {
-        this.velocity = data().deepCopy(fields()[3].schema(), other.velocity);
+      if (isValidValue(fields()[3], other.acceleration)) {
+        this.acceleration = data().deepCopy(fields()[3].schema(), other.acceleration);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.velocity)) {
+        this.velocity = data().deepCopy(fields()[4].schema(), other.velocity);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -295,40 +325,78 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
     }
 
     /**
-      * Gets the value of the 'temperature' field.
+      * Gets the value of the 'internalTemperature' field.
       * @return The value.
       */
-    public java.lang.Float getTemperature() {
-      return temperature;
+    public java.lang.Float getInternalTemperature() {
+      return internalTemperature;
     }
 
     /**
-      * Sets the value of the 'temperature' field.
-      * @param value The value of 'temperature'.
+      * Sets the value of the 'internalTemperature' field.
+      * @param value The value of 'internalTemperature'.
       * @return This builder.
       */
-    public com.javaclub.Sensor.Builder setTemperature(float value) {
+    public com.javaclub.Sensor.Builder setInternalTemperature(float value) {
       validate(fields()[1], value);
-      this.temperature = value;
+      this.internalTemperature = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'temperature' field has been set.
-      * @return True if the 'temperature' field has been set, false otherwise.
+      * Checks whether the 'internalTemperature' field has been set.
+      * @return True if the 'internalTemperature' field has been set, false otherwise.
       */
-    public boolean hasTemperature() {
+    public boolean hasInternalTemperature() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'temperature' field.
+      * Clears the value of the 'internalTemperature' field.
       * @return This builder.
       */
-    public com.javaclub.Sensor.Builder clearTemperature() {
+    public com.javaclub.Sensor.Builder clearInternalTemperature() {
       fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'externalTemperature' field.
+      * @return The value.
+      */
+    public java.lang.Float getExternalTemperature() {
+      return externalTemperature;
+    }
+
+    /**
+      * Sets the value of the 'externalTemperature' field.
+      * @param value The value of 'externalTemperature'.
+      * @return This builder.
+      */
+    public com.javaclub.Sensor.Builder setExternalTemperature(float value) {
+      validate(fields()[2], value);
+      this.externalTemperature = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'externalTemperature' field has been set.
+      * @return True if the 'externalTemperature' field has been set, false otherwise.
+      */
+    public boolean hasExternalTemperature() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'externalTemperature' field.
+      * @return This builder.
+      */
+    public com.javaclub.Sensor.Builder clearExternalTemperature() {
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -346,9 +414,9 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.javaclub.Sensor.Builder setAcceleration(float value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.acceleration = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -357,7 +425,7 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'acceleration' field has been set, false otherwise.
       */
     public boolean hasAcceleration() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -366,7 +434,7 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.javaclub.Sensor.Builder clearAcceleration() {
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -384,9 +452,9 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.javaclub.Sensor.Builder setVelocity(float value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.velocity = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -395,7 +463,7 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return True if the 'velocity' field has been set, false otherwise.
       */
     public boolean hasVelocity() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -404,7 +472,7 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
       * @return This builder.
       */
     public com.javaclub.Sensor.Builder clearVelocity() {
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -414,9 +482,10 @@ public class Sensor extends org.apache.avro.specific.SpecificRecordBase implemen
       try {
         Sensor record = new Sensor();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.temperature = fieldSetFlags()[1] ? this.temperature : (java.lang.Float) defaultValue(fields()[1]);
-        record.acceleration = fieldSetFlags()[2] ? this.acceleration : (java.lang.Float) defaultValue(fields()[2]);
-        record.velocity = fieldSetFlags()[3] ? this.velocity : (java.lang.Float) defaultValue(fields()[3]);
+        record.internalTemperature = fieldSetFlags()[1] ? this.internalTemperature : (java.lang.Float) defaultValue(fields()[1]);
+        record.externalTemperature = fieldSetFlags()[2] ? this.externalTemperature : (java.lang.Float) defaultValue(fields()[2]);
+        record.acceleration = fieldSetFlags()[3] ? this.acceleration : (java.lang.Float) defaultValue(fields()[3]);
+        record.velocity = fieldSetFlags()[4] ? this.velocity : (java.lang.Float) defaultValue(fields()[4]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
